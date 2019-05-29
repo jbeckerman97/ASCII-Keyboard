@@ -50,7 +50,7 @@ map<_Uint32t, string> keyboardKeys = {
    {0x005D, "  OPT  |"}, {0xFFFE, "  ALT  |"}, {0x00A3, "  CTRL  |"}, {0x0025, "  LEFT  |"}, {0x0028, "  DOWN  |"}, {0x0027, "  RIGHT  |\n"}
 };
 
-/* Need separate map for these because some of the EBX flag codes are the same as virtual key codes This map will be used in displayKeyboard
+/* Need separate map for these because some of the EBX flag codes are the same as virtual key codes. This map will be used in displayKeyboard
    to determine if the flag is being pressed at the same time as one of the keys. Flag code is stored in EBX through Irvine. Sometimes
    the virtual code changes, and I can't figure out why. The code for any flag is one of two options, so I handle both.
    0x00000010 or 0x00000030 is Shift, 0x00000080 or 0x000000A0 is Caps Lock, 0x00000002 or 0x00000022 is Left-Alt, 
@@ -81,7 +81,7 @@ _Uint32t virtualKeyCodes[] = {
    keyboardKeys twice (once to insert asterisks for spaces, once to insert spaces for asterisks) and having to find
    the key value for the appropriate string for the latter string replacement. */
 /* The data type here is uint16_t because I found that when pushing dx, it accumulated other values in the first 16 bits
-   that made a comparison between the key codes I define and the value being received into key unequal. By making storeKey
+   that made a comparison between the key codes I define and the value being received into key unequal. By making storeKey16
    uint16_t and setting it equal to key, it only stores the last 16 bits. storeKey16 is then converted back to a _Uint32t
    type because the codes in virtualKeyCodes are compared as 32-bit data types, and checking for equality between the 16-bit
    and 32-bit versions of the same number returns false. */
